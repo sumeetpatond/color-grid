@@ -1,23 +1,21 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Row from './components/Row';
 
 function App() {
+  const [firstActive, setFirstActive] = useState({rowid:null, boxid:null})
+  const [secondActive, setSecondActive] = useState({rowid:null, boxid:null})
+  const handleClick = (rowid, boxid) => {
+    if(secondActive.rowid === rowid && secondActive.boxid === boxid) return;
+    setFirstActive(secondActive);
+    setSecondActive({rowid, boxid})
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Row rowid="0" handleClick={handleClick} firstActive={firstActive} secondActive={secondActive}/>
+      <Row rowid="1" handleClick={handleClick} firstActive={firstActive} secondActive={secondActive}/>
+      <Row rowid="2" handleClick={handleClick} firstActive={firstActive} secondActive={secondActive}/>
+      <Row rowid="3" handleClick={handleClick} firstActive={firstActive} secondActive={secondActive}/>
     </div>
   );
 }
